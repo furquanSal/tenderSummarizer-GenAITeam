@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      text-align: center;
+      padding: 50px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.8s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .col-sm-12 {
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 10px;
+      border: none;
+      background-color: #000000;
+      color: #fff;
+      font-size: 20px;
+      text-decoration: none;
+      border-radius: 30px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #3d2f0f;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transform: translateY(-3px);
+    }
+    h2 {
+      font-size: 42px;
+      margin-bottom: 30px;
+      color: #3d2f0f;
+      letter-spacing: 1px;
+    }
+    p {
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Welcome!</h2>
+      <p>Sign in if you're already registered or sign up if you're new to the platform.</p>
+    </div>
+  </div>
+  <div class="row btn-container">
+    <div class="col-sm-12">
+        <a href="/login" class="btn">Sign In</a>
+      <a href="/register" class="btn">Sign Up</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>User Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin-top: 128px;
+      margin-bottom: 128px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .dashboard-wrapper {
+      background-color: #fff;
+      border-radius: 10px;
+      padding-top: 40px;
+      padding-right: 40px;
+      padding-left: 40px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      width: 800px;
+    }
+
+    .dashboard-header {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .user-info {
+      margin-bottom: 30px;
+    }
+
+    .user-info p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #3d2f0f;
+    }
+
+    .user-info b {
+      color: #3d2f0f;
+    }
+
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: inline-block;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3d2f0f;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background-color: #000000;
+    }
+
+    .exciting-feature {
+      margin-top: 50px;
+      text-align:center;
+    }
+
+    .exciting-feature img {
+      width: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .exciting-feature p {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .exciting-feature a {
+      color: #3d2f0f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .exciting-feature a:hover {
+      text-decoration: underline;
+    }
+
+    .summarize-container {
+      background-color: #f8f9fa;
+      border:0.5px solid #3d2f0f;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+      border-radius: 24px;
+      text-align: center;
+    }
+
+    .summarize-container h2 {
+      color: #3d2f0f;
+      font-family: Arial, sans-serif;
+      margin-top: 0;
+    }
+
+    .form-group label {
+      color: #3d2f0f;
+      font-family: Arial, sans-serif;
+    }
+    .form-group input[type="file"] {
+      color: #3d2f0f;
+      background-color: transparent;
+      border: 2px solid #3d2f0f;
+      border-radius: 8px;
+      padding: 10px 20px;
+      margin-top: 10px;
+      margin-bottom: 10px; /* Add this line to add space */
+      font-family: Arial, sans-serif;
+    }
+
+    .form-upload input[type="submit"] {
+      color: white;
+      background-color: #3d2f0f;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-family: Arial, sans-serif;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-upload input[type="submit"]:hover {
+      background-color: black;
+    }
+
+    .dropbtn {
+      background-color: #3d2f0f;
+      color: white;
+      font-size:16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    /* Style the dropdown content */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 5px;
+    }
+  
+    .dropdown-content label {
+      display: block;
+      padding: 10px;
+      cursor: pointer;
+    }
+  
+    .dropdown-content label:hover {
+      background-color: #ddd;
+    }
+  
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  
+    /* Change color of dropdown button on hover */
+    .dropdown:hover .dropbtn {
+      background-color: #555;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+  <div class="dashboard-header">
+
+    {% if user %}
+    <p style='text-align:center;margin-bottom:4px;'>Hello, <b>{{ user[1] }}</b> 🙋‍♂️ <br> <p style='font-size:28px; text-align:center;margin-top:0px'>Configure the tool settings to get started </p>
+      
+      <div class="user-info">
+        {% if not user %}
+        <p>User not found</p>
+        {% endif %}
+      </div>
+    {% else %}
+    <p>User not found</p>
+    {% endif %}
+
+  </div>
+
+  <div class="sidebar">
+    <h3>Select Language Model</h3>
+    <input type="radio" name="languageModel" value="GPT-4"> OpenAI GPT-4<br>
+    <input type="radio" name="languageModel" value="GoogleGemini"> Google Gemini<br>
+    
+    <h3>Select an Option</h3>
+    <input type="radio" name="option" value="PotentialQuestions"> Potential Questions Generation<br>
+    <input type="radio" name="option" value="Summarization"> Summarization<br>
+    <input type="radio" name="option" value="PDFChatbot"> PDF Chatbot<br>
+    
+    <div id="summarizationOptions" style="display: none;">
+      <h3>Summarization Options</h3>
+      <input type="radio" name="summarizationOption" value="TenderDocument"> Sections from Tender Document<br>
+
+      <div class="dropdown" id="sectionOptionsDropdown">
+        <input type="radio" name="option" value="select-an-option"> <button class="dropbtn">Select Options from pre-defined list</button>
+        <div class="dropdown-content" id="sectionOptions">
+          <label><input type="checkbox" value="Title and Introduction">Title and Introduction</label>
+          <label><input type="checkbox" value="Scope of Work">Scope of Work</label>
+          <label><input type="checkbox" value="Eligibility Criteria and Qualifications">Eligibility Criteria and Qualifications</label>
+          <label><input type="checkbox" value="Submission Guidelines">Submission Guidelines</label>
+          <label><input type="checkbox" value="Evaluation Criteria">Evaluation Criteria</label>
+          <label><input type="checkbox" value="Pricing and Payment Terms">Pricing and Payment Terms</label>
+          <label><input type="checkbox" value="Contractual Terms and Conditions">Contractual Terms and Conditions</label>
+          <label><input type="checkbox" value="Key Dates, Schedule and Milestones">Key Dates, Schedule and Milestones</label>
+          <label><input type="checkbox" value="Contact Information">Contact Information</label>
+          <label><input type="checkbox" value="Appendices and Attachments">Appendices and Attachments</label>
+        </div>
+      </div>
+
+      <div id="selectedOptionsContainer" style="display: none;">
+        <p>You have chosen : <span id="selectedOptions"></span>. Click <span id="resetLink" style="display: none;"><a href="#" style="color: red;">here</a></span> to reset!</p>
+      </div>
+
+  </div>
+
+  
+  <div class='content'>
+    <div class="summarize-container">
+      <h2>Upload PDF To Summarize</h2>
+      <form action="/summarized" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="file" id="pdf" name="file" required>
+        </div>
+        <div class="form-upload">
+          <input type="submit" value="Continue">
+        </div>
+      </form>
+    </div>
+    
+    <div class="exciting-feature">
+      <p>Check out <a href="https://furquan.tech" target="_blank">developer's portfolio</a>.</p>
+    </div>
+  </div>
+</div>
+
+<a href="/logout" class="logout-btn">Logout</a>
+
+<script>
+  document.querySelectorAll('input[name="option"]').forEach((option) => {
+    option.addEventListener('change', function() {
+      if (this.value === 'Summarization') {
+        document.getElementById('summarizationOptions').style.display = 'block';
+      } else {
+        document.getElementById('summarizationOptions').style.display = 'none';
+      }
+    });
+  });
+
+  const options = document.querySelectorAll('#sectionOptions input[type="checkbox"]');
+  options.forEach(option => {
+    option.addEventListener('change', function() {
+      const selectedOptions = Array.from(options)
+        .filter(option => option.checked)
+        .map(option => option.value);
+      document.getElementById('selectedOptions').textContent = selectedOptions.join(', ');
+      document.getElementById('selectedOptionsContainer').style.display = 'block';
+      document.getElementById('resetLink').setAttribute('style', 'display: inline;');
+    });
+  });
+
+
+    // Function to reset selected options
+    document.getElementById('resetLink').addEventListener('click', function() {
+      options.forEach(option => {
+        option.checked = false;
+      });
+      document.getElementById('selectedOptions').textContent = '';
+      this.setAttribute('style', 'display: none;');
+    });
+
+
+
+    // Wait for the DOM to be fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+  // Get references to relevant elements
+  var sectionOptionsDropdown = document.getElementById("sectionOptionsDropdown");
+  var selectedOptionsContainer = document.getElementById("selectedOptionsContainer");
+  var resetLink = document.getElementById("resetLink");
+
+  // Add event listener to the dropdown to show selected options
+  sectionOptionsDropdown.addEventListener("change", function() {
+      var selectedOptions = getSelectedOptions();
+      if (selectedOptions.length > 0) {
+          selectedOptionsContainer.style.display = "block";
+          document.getElementById("selectedOptions").textContent = selectedOptions.join(", ");
+      } else {
+          selectedOptionsContainer.style.display = "none";
+      }
+  });
+
+  // Add event listener to reset link to hide selected options
+  resetLink.addEventListener("click", function(event) {
+      event.preventDefault();
+      selectedOptionsContainer.style.display = "none";
+      // You can reset the dropdown or any other necessary actions here
+  });
+
+  // Function to get selected options from dropdown
+  function getSelectedOptions() {
+      var selectedOptions = [];
+      var checkboxes = document.querySelectorAll("#sectionOptions input[type=checkbox]:checked");
+      checkboxes.forEach(function(checkbox) {
+          selectedOptions.push(checkbox.value);
+      });
+      return selectedOptions;
+  }
+});
+
+
+// Wait for the DOM to be fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+  // Get references to relevant elements
+  var languageModelRadios = document.getElementsByName("languageModel");
+
+  // Add event listener to language model radios to show API key input
+  for (var i = 0; i < languageModelRadios.length; i++) {
+      languageModelRadios[i].addEventListener("change", function() {
+          // Check if the radio button is checked
+          if (this.checked) {
+              var modelName = this.value;
+              // Create and append API key input field
+              var apiKeyInput = document.createElement("input");
+              apiKeyInput.setAttribute("type", "text");
+              apiKeyInput.setAttribute("placeholder", "Enter API key for " + modelName);
+              apiKeyInput.setAttribute("id", "apiKeyInput");
+              apiKeyInput.setAttribute("name", "apiKeyInput");
+              
+              // Get the label of the selected radio button
+              var label = this.nextSibling;
+              // Insert a line break
+              var lineBreak = document.createElement("br");
+              label.parentNode.insertBefore(lineBreak, label.nextSibling);
+              // Insert the API key input field after the label
+              label.parentNode.insertBefore(apiKeyInput, lineBreak.nextSibling);
+          }
+      });
+  }
+});
+
+
+</script>
+
+</body>
+</html>

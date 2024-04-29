@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .form-container {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .btn-dark {
+        background-color: #333;
+    }
+    .btn-dark:hover {
+        background-color: #555;
+    }
+    .alert {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    .statement {
+        font-size: 16px;
+        color: #666;
+        margin-top: 20px;
+    }
+    .statement a {
+        color: #3d2f0f;
+        text-decoration: none;
+    }
+    .statement a:hover {
+        text-decoration: underline;
+    }
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="form-container">
+        <h2 style="text-align: center;">Login</h2>
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+        <div class="register-link">
+            <p>Not Registered? <a href="/register" style='color:#3d2f0f'>Click here to register</a></p>
+        </div>
+        {% if error %}
+        <div class="alert" id="error-message">{{ error }}</div>
+        {% endif %}
+    </div>
+    <div class="statement">
+        <p>Go back to <a href="/" style='color:#3d2f0f'><b>Home Page</b></a></p>
+    </div>
+</div>
+<script>
+    window.onload = function() {
+        var errorMessage = document.getElementById('error-message');
+        if(errorMessage) {
+            setTimeout(function() {
+                errorMessage.style.opacity = '0';
+            }, 3000);
+        }
+    };
+</script>
+</body>
+</html>

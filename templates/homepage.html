@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tender Prism</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="file"] {
+            margin-top: 10px;
+        }
+        #predefined-sections {
+            display: none;
+        }
+    </style>
+    <script>
+        function showPredefinedSections() {
+            var selectedOption = document.getElementById("selected_main_option").value;
+            var predefinedSections = document.getElementById("predefined-sections");
+
+            if (selectedOption === "Summarization") {
+                predefinedSections.style.display = "block";
+            } else {
+                predefinedSections.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Tender Prism</h1>
+        <form action="/process" method="post">
+            <label for="llm_option">Select Language Model to Use:</label>
+            <select name="llm_option" id="llm_option">
+                <option value="OpenAI GPT-4">OpenAI GPT-4</option>
+                <option value="Google Gemini">Google Gemini</option>
+            </select>
+
+            <label for="selected_main_option">Select an Option:</label>
+            <select name="selected_main_option" id="selected_main_option" onchange="showPredefinedSections()">
+                <option value="Potential Questions Generation">Potential Questions Generation</option>
+                <option value="Summarization">Summarization</option>
+                <option value="PDF Chatbot">PDF Chatbot</option>
+            </select>
+
+            <div id="predefined-sections">
+                <label for="predefined_sections">Select predefined sections:</label><br>
+                <select name="predefined_sections" id="predefined_sections" multiple>
+                    <option value="Title and Introduction">Title and Introduction</option>
+                    <option value="Scope of Work">Scope of Work</option>
+                    <option value="Eligibility Criteria and Qualifications">Eligibility Criteria and Qualifications</option>
+                    <option value="Submission Guidelines">Submission Guidelines</option>
+                    <option value="Evaluation Criteria">Evaluation Criteria</option>
+                    <option value="Pricing and Payment Terms">Pricing and Payment Terms</option>
+                    <option value="Contractual Terms and Conditions">Contractual Terms and Conditions</option>
+                    <option value="Key Dates, Schedule and Milestones">Key Dates, Schedule and Milestones</option>
+                    <option value="Contact Information">Contact Information</option>
+                    <option value="Appendices and Attachments">Appendices and Attachments</option>
+                </select>
+            </div>
+
+            <input type="file" name="file" id="file" accept=".pdf,.docx,.txt" multiple>
+            
+            <input type="submit" value="Start.." onclick="return validateForm()">
+        </form>
+    </div>
+    <script>
+        function validateForm() {
+            var llmOption = document.getElementById("llm_option").value;
+            var selectedMainOption = document.getElementById("selected_main_option").value;
+            var file = document.getElementById("file").files;
+
+            if (llmOption === "" || selectedMainOption === "" || file.length === 0) {
+                alert("Please select language model, main option, and upload at least one file.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

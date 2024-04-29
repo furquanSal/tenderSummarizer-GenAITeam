@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>User Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .dashboard-wrapper {
+      background-color: #fff;
+      border-radius: 10px;
+      padding-top: 40px;
+      padding-right: 40px;
+      padding-left: 40px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      width: 800px;
+      text-align: center;
+    }
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: inline-block;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3d2f0f;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .logout-btn:hover {
+      background-color: #000000;
+    }
+    .statement {
+        font-size: 16px;
+        color: #666;
+        margin-top: 20px;
+    }
+    .statement a {
+        color: #3d2f0f;
+        text-decoration: none;
+    }
+    .statement a:hover {
+        text-decoration: underline;
+    }
+    .summarized-content{
+        margin-bottom:84px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+    <div class="summarized-content">
+        <h2>Summarized Content</h2>
+        <p>{{ summarized_version }}</p>
+    </div>
+
+    <div class="statement">
+        <p>Go back to <a href="/dashboard" style='color:#3d2f0f'><b>Dashboard</b></a></p>
+    </div>
+</div>
+
+
+<a href="/logout" class="logout-btn">Logout</a>
+
+</body>
+</html>
